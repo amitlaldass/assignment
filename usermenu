@@ -1,0 +1,70 @@
+#!/usr/bin/ksh
+#######################################################################
+#Author:Amit Kumar
+#email ID:amitforjob@gmail.com
+#######################################################################
+USER=`/usr/bin/logname`
+main()
+{
+while true
+do
+{
+clear
+echo "1. Change your passwd"
+echo "2. See the Disk space"
+echo "3. login to other box using ssh"
+echo "4. Show all services running"
+echo "5. Show all Ports opened"
+echo "6. Show All Java Apps running"
+echo "7. Facility to kill an application"
+echo "8. exit"
+echo "Enter your choice:"|tr -s "\n" " "
+read a
+case $a in 
+1)
+/usr/bin/passwd
+echo "Press enter for the menu"
+read
+;;
+2)
+/bin/df
+echo "Press enter for the menu"
+read
+;;
+3)
+echo "Enter the hostname where you want to enter :"|tr -s "\n" " "
+read hostn
+/usr/bin/ssh -l $USER $hostn
+;;
+4)
+echo "Following Services are running in the server :"|tr -s "\n" " "
+/sbin/service --status-all|grep running
+;;
+5)
+netstat -anp|more
+;;
+6)
+ps -ef|grep java
+;;
+7)
+echo "enter the name of the Application you want to kill:"|tr -s "\n" " "
+read app
+ps -ef|grep $app|grep -v grep|grep -q $app
+if [ $? -eq 0 ]
+then
+kill `ps -ef|grep $app|grep -v grep|awk '{print $2}'`
+else
+echo "$app is not running on the server"
+fi
+;;
+8)
+exit
+;;
+*)
+echo "Enter a valid Choice [1-8]"
+;;
+esac
+}
+done
+}
+main
