@@ -41,7 +41,7 @@ echo "Following Services are running in the server :"|tr -s "\n" " "
 /sbin/service --status-all|grep running
 ;;
 5)
-netstat -anp|more
+netstat -ntpl|more
 ;;
 6)
 ps -ef|grep java
