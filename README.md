@@ -10,4 +10,6 @@ The script is a menu based system that does following
 7.       Facility to kill a  app
 8.       Exit
 
-The script is written to be able to run in RHEL linux.
+The script is written to be able to run in RHEL linux (CENTOS is derieved from RHEL).
+to run copy the script and run
+#./usermenu
